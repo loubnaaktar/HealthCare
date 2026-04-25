@@ -13,4 +13,6 @@ public class RendezVousDTO {
     private LocalDateTime dateRendezVous;
     @NotNull(message = "statut est obligatoire")
     private RendezVous.StatutRendezVous statut;
+    private Long idPatient;
+    private Long idMedecin;
 }

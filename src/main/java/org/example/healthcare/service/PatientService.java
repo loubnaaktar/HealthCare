@@ -15,9 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 public class PatientService {
 
-final PatientRepository patientRepository;
-final PatientMapper  patientMapper;
-    private final MapperBuilder mapperBuilder;
+private final PatientRepository patientRepository;
+private final PatientMapper  patientMapper;
+
 
     public PatientDTO ajouterPatient(PatientDTO patientDTO) {
 
@@ -27,8 +27,7 @@ final PatientMapper  patientMapper;
 public PatientDTO modifierPatient(Long idPatient, PatientDTO patientDTO) {
 Patient patient = patientMapper.toEntity(chercherPatientParId(idPatient));
 patientMapper.modifierPatient(patientDTO,patient);
-Patient newPatient = patientRepository.save(patient);
-return patientMapper.toDTO(newPatient);
+return patientMapper.toDTO(patientRepository.save(patient));
 }
 
 public PatientDTO chercherPatientParId(Long idPatient) {

@@ -14,10 +14,8 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class MedecinService {
-    final MedecinRepository medecinRepository;
-    final MedecinMapper medecinMapper;
-    private final MapperBuilder mapperBuilder;
-    private final RepositoryMethodInvocationListener repositoryMethodInvocationListener;
+    private final MedecinRepository medecinRepository;
+    private final MedecinMapper medecinMapper;
 
     public MedecinDTO ajouterMedecin(MedecinDTO medecinDTO){
         Medecin medecin = medecinMapper.toEntity(medecinDTO);
@@ -27,8 +25,7 @@ public class MedecinService {
     public MedecinDTO modifierMedecin(Long idMedecin, MedecinDTO medecinDTO){
         Medecin medecin = chercherMedecinParId(idMedecin);
         medecinMapper.modifierMedecinDTO(medecinDTO,medecin);
-        Medecin newMedecin = medecinRepository.save(medecin);
-        return medecinMapper.toDTO(newMedecin);
+        return medecinMapper.toDTO(medecinRepository.save(medecin));
     }
 
     public Medecin chercherMedecinParId(Long idMedecin){
