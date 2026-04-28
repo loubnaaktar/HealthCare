@@ -1,6 +1,7 @@
 package org.example.healthcare.service;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.DossierMedicalDTO;
 import org.example.healthcare.mapper.DossierMedicalMapper;
 import org.example.healthcare.model.DossierMedical;
@@ -13,7 +14,7 @@ import tools.jackson.databind.cfg.MapperBuilder;
 import java.time.LocalDate;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DossierMedicalService {
     final DossierMedicalRepository dossierMedicalRepository;
     final DossierMedicalMapper dossierMedicalMapper;

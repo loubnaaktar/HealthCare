@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 @Data
-public class PatientDTO {
+public class  PatientDTO {
     private Long id;
     @NotBlank(message ="le nom est obligatoire")
     private String nom;

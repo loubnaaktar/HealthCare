@@ -1,6 +1,7 @@
 package org.example.healthcare.service;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.RendezVousDTO;
 import org.example.healthcare.mapper.RendezVousMapper;
 import org.example.healthcare.model.Medecin;
@@ -17,7 +18,7 @@ import java.util.List;
 import static org.example.healthcare.model.RendezVous.StatutRendezVous.*;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RendezVousService {
     private final RendezVousMapper rendezVousMapper;
     private final RendezVousRepository rendezVousRepository;
