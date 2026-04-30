@@ -116,6 +116,7 @@ class RendezVousServiceTest {
         rv.setStatut(RendezVous.StatutRendezVous.CONFIRME);
         rv = rvRepo.save(rv);
 
+
         RendezVousDTO dto = rendezVousService.annulerRendezVous(rv.getId());
 
         assertEquals(RendezVous.StatutRendezVous.ANNULE,dto.getStatut());
