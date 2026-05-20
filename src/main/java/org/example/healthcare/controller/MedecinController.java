@@ -7,6 +7,8 @@ import org.example.healthcare.model.Medecin;
 import org.example.healthcare.service.MedecinService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +21,13 @@ import java.util.List;
 public class MedecinController {
     private final MedecinService medecinService;
 
+
+
+
+
     @GetMapping
-    public Page<MedecinDTO> medecinList(Pageable pageable){
+    public Page<MedecinDTO> medecinList(  @PageableDefault(sort = "specialite",
+            direction = Sort.Direction.ASC)Pageable pageable){
         return medecinService.medecinsList(pageable);
     }
 

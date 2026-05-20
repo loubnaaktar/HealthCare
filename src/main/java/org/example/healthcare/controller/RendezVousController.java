@@ -6,6 +6,8 @@ import org.example.healthcare.dto.RendezVousDTO;
 import org.example.healthcare.model.RendezVous;
 import org.example.healthcare.service.RendezVousService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +22,9 @@ public class RendezVousController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public Page<RendezVousDTO> rendezVousList(Pageable pageable){
+
+    public Page<RendezVousDTO> rendezVousList(  @PageableDefault(sort = "dateRendezVous",
+            direction = Sort.Direction.ASC)Pageable pageable){
         return rendezVousService.rendezVousDTOList(pageable);
     }
 
