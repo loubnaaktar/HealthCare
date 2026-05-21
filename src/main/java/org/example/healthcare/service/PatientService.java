@@ -7,9 +7,10 @@ import org.example.healthcare.dto.PatientDTO;
 import org.example.healthcare.mapper.PatientMapper;
 import org.example.healthcare.model.Patient;
 import org.example.healthcare.repository.PatientRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import tools.jackson.databind.cfg.MapperBuilder;
-
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Service
@@ -40,12 +41,17 @@ public void supprimerPatient(Long idPatient) {
         patientRepository.delete(patient);
 }
 
-public List<PatientDTO> patientsList(){
-        List<Patient> patients = patientRepository.findAll();
-        return patientMapper.toDTO(patients);
-}
+    public Page<PatientDTO> patientsList(Pageable pageable){
+        Page<Patient> patients = patientRepository.findAll(pageable);
+        return patients.map(patientMapper::toDTO);
+    }
 
 public PatientDTO consulterPatient(Long idPatient) {
         return  patientMapper.toDTO(chercherPatientParId(idPatient));
+}
+
+public Page<PatientDTO> PageParNomPatient(String nom, Pageable pageable){
+        Page<Patient> patientPage = patientRepository.findAllByNom(nom,pageable);
+        return patientPage.map(patientMapper::toDTO);
 }
 }

@@ -26,7 +26,7 @@ public class AuthService {
         user.setRole(request.getRole());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         repo.save(user);
-        return jwtService.generateToken(request.getEmail());
+        return jwtService.generateToken(user.getEmail(),user);
     }
     public String authenticate(AuthRequest request) {
 
@@ -48,6 +48,6 @@ public class AuthService {
         )) {
             throw new RuntimeException("mot de passe incorrect");
         }
-        return jwtService.generateToken(request.getEmail());
+        return jwtService.generateToken(user.getEmail(),user);
     }
 }

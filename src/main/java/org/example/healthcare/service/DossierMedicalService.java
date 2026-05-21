@@ -8,6 +8,8 @@ import org.example.healthcare.model.DossierMedical;
 import org.example.healthcare.model.Patient;
 import org.example.healthcare.repository.DossierMedicalRepository;
 import org.example.healthcare.repository.PatientRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import tools.jackson.databind.cfg.MapperBuilder;
 
@@ -43,5 +45,10 @@ public class DossierMedicalService {
     }
     public DossierMedicalDTO consulterDossierMedicalParId(Long idDossier) {
         return dossierMedicalMapper.toDTO(chercherDossierMedicalParId(idDossier));
+    }
+
+    public Page<DossierMedicalDTO> dossierMedicalPage(Pageable pageable){
+        Page<DossierMedical> page =  dossierMedicalRepository.findAll(pageable);
+        return page.map(dossierMedicalMapper::toDTO);
     }
 }
