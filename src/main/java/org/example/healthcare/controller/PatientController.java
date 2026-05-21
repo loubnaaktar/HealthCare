@@ -11,8 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.awt.print.Pageable;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @AllArgsConstructor
@@ -46,5 +45,10 @@ return patientService.modifierPatient(id,patientDTO);
     @GetMapping("/chercher/{id}")
     public PatientDTO chercherPatient(@PathVariable Long id) {
         return patientService.consulterPatient(id);
+    }
+
+    @GetMapping("/Chercher_par_nom/{nom}")
+    public Page<PatientDTO> patientParNom(@PathVariable String nom ,@PageableDefault(direction = Sort.Direction.ASC) Pageable pageable){
+        return patientService.PageParNomPatient(nom,pageable);
     }
 }

@@ -21,10 +21,6 @@ import java.util.List;
 public class MedecinController {
     private final MedecinService medecinService;
 
-
-
-
-
     @GetMapping
     public Page<MedecinDTO> medecinList(  @PageableDefault(sort = "specialite",
             direction = Sort.Direction.ASC)Pageable pageable){
@@ -44,5 +40,10 @@ public class MedecinController {
     @DeleteMapping("/supprimer/{id}")
     public void deleteMedecin(@PathVariable Long id){
         medecinService.supprimerMedecin(id);
+    }
+
+    @GetMapping("/chercher_par_specialite/{specialite}")
+    public Page<MedecinDTO> medecinDTOPageParSpecialite(@PathVariable String specialite, @PageableDefault(direction = Sort.Direction.ASC) Pageable pageable){
+        return medecinService.medecinParSpecialite(specialite, pageable);
     }
 }

@@ -12,8 +12,7 @@ import org.example.healthcare.repository.PatientRepository;
 import org.example.healthcare.repository.RendezVousRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-import java.awt.print.Pageable;
+import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -92,5 +91,10 @@ public class RendezVousService {
     public Page<RendezVousDTO> rendezVousDtoMedecin(Long idMedecin, Pageable pageable){
         Page<RendezVous> list = rendezVousRepository.findByMedecin_Id(idMedecin,pageable);
         return list.map(rendezVousMapper::toDTO);
+    }
+
+    public Page<RendezVousDTO> rendezVousDTOSParStatut(RendezVous.StatutRendezVous statut , Pageable pageable){
+        Page<RendezVous> rendezVousDTOPage = rendezVousRepository.findAllByStatut(statut, pageable);
+        return rendezVousDTOPage.map(rendezVousMapper::toDTO);
     }
 }

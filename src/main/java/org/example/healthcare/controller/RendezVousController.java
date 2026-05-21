@@ -10,8 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.awt.print.Pageable;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @AllArgsConstructor
@@ -60,7 +59,8 @@ public class RendezVousController {
         return rendezVousService.modifierRendezVous(idRendezVous,rendezVousDTO);
     }
 
-
-
-
+    @GetMapping("/chercher_par_statut/{statut}")
+    public Page<RendezVousDTO> chercherParStatut(@PathVariable RendezVous.StatutRendezVous statut, @PageableDefault(sort = "dateRendezVous",direction = Sort.Direction.ASC)Pageable pageable){
+        return rendezVousService.rendezVousDTOSParStatut(statut,pageable);
+    }
 }

@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.healthcare.dto.DossierMedicalDTO;
 import org.example.healthcare.service.DossierMedicalService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,11 @@ import org.springframework.web.bind.annotation.*;
 public class DossierMedicalController {
     private final DossierMedicalService dossierMedicalService;
 
+    @GetMapping
+    @PreAuthorize("hasRole('MEDECIN')")
+    public Page<DossierMedicalDTO> dossierMedicalDTOPage(Pageable pageable){
+        return dossierMedicalService.dossierMedicalPage(pageable);
+    }
     @PreAuthorize("hasAnyRole('PATIENT','MEDECIN')")
     @GetMapping("/consulter/{id}")
     public DossierMedicalDTO consulterDM(@PathVariable Long id) {

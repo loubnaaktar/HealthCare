@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.core.support.RepositoryMethodInvocationListener;
 import org.springframework.stereotype.Service;
-import org.springframework.web.accept.ApiVersionStrategy;
 import tools.jackson.databind.cfg.MapperBuilder;
 
 import java.util.List;
@@ -21,7 +20,6 @@ import java.util.List;
 public class MedecinService {
     private final MedecinRepository medecinRepository;
     private final MedecinMapper medecinMapper;
-    private final ApiVersionStrategy mvcApiVersionStrategy;
 
     public MedecinDTO ajouterMedecin(MedecinDTO medecinDTO){
         Medecin medecin = medecinMapper.toEntity(medecinDTO);
@@ -46,5 +44,10 @@ public class MedecinService {
     public Page<MedecinDTO> medecinsList(Pageable pageable){
         Page<Medecin> medecins = medecinRepository.findAll(pageable);
         return medecins.map(medecinMapper::toDTO);
+    }
+
+    public Page<MedecinDTO> medecinParSpecialite(String specialite, Pageable pageable){
+        Page<Medecin> medecinPage = medecinRepository.findAllBySpecialite(specialite,pageable);
+        return medecinPage.map(medecinMapper::toDTO);
     }
 }
