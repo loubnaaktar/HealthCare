@@ -54,4 +54,14 @@ public Page<PatientDTO> PageParNomPatient(String nom, Pageable pageable){
         Page<Patient> patientPage = patientRepository.findAllByNom(nom,pageable);
         return patientPage.map(patientMapper::toDTO);
 }
+
+    public PatientDTO getPatient(Long id, String email){
+
+        Patient patient = patientRepository
+                .findByIdAndEmail(id, email)
+                .orElseThrow(() ->
+                        new RuntimeException("vous ne puvez pas consulter ce patient "));
+
+        return patientMapper.toDTO(patient);
+    }
 }

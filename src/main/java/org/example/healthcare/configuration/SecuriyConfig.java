@@ -33,32 +33,25 @@ public class SecuriyConfig {
 
     private final CustomUserDetailsService userDetailsService;
 
-     @Bean
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, GlobalExceptionHandler.JwtFilter jwtFilter) throws Exception {
 
-         http.csrf(AbstractHttpConfigurer::disable)
-                 .authorizeHttpRequests(auth -> {
-                     auth.requestMatchers(
-                                     "/api/auth/**"
-                             ).permitAll()
-                             .anyRequest()
-                             .authenticated();
-                 })
-                             .addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class)
-                             .authenticationManager(authenticationManager(http,passwordEncoder()));
+        http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> {
+            auth.requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated();
+        }).addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class).authenticationManager(authenticationManager(http, passwordEncoder()));
 
-         return http.build();
-     }
+        return http.build();
+    }
 
-     @Bean
-    public PasswordEncoder passwordEncoder(){
-         return new BCryptPasswordEncoder();
-     }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-     @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http,PasswordEncoder passwordEncoder){
-         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-         return authenticationManagerBuilder.build();
-     }
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http, PasswordEncoder passwordEncoder) {
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+        return authenticationManagerBuilder.build();
+    }
 }

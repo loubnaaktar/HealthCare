@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
@@ -50,5 +51,16 @@ return patientService.modifierPatient(id,patientDTO);
     @GetMapping("/Chercher_par_nom/{nom}")
     public Page<PatientDTO> patientParNom(@PathVariable String nom ,@PageableDefault(direction = Sort.Direction.ASC) Pageable pageable){
         return patientService.PageParNomPatient(nom,pageable);
+    }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('PATIENT')")
+    public PatientDTO getPatient(@PathVariable Long id,
+                                 Authentication authentication){
+
+        return patientService.getPatient(
+                id,
+                authentication.getName()
+        );
     }
 }
