@@ -13,13 +13,10 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Patient {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Patient extends Utilisateur {
+
     private String nom;
     private String prenom;
-    private String email;
     private String telephone;
     private LocalDate dateNaissance;
 
@@ -28,8 +25,4 @@ public class Patient {
 
     @OneToOne(mappedBy = "patient")
     private DossierMedical dossierMedical;
-
-    @OneToOne
-    Utilisateur utilisateur;
 }
-

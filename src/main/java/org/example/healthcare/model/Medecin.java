@@ -12,17 +12,12 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Medecin {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Medecin extends Utilisateur {
+
     private String nom;
     private String specialite;
-    private String email;
     private String telephone;
 
     @OneToMany(mappedBy = "medecin")
-   private List<RendezVous> rendezVousList = new ArrayList<>();
-@OneToOne
-Utilisateur utilisateur;
+    private List<RendezVous> rendezVousList = new ArrayList<>();
 }
