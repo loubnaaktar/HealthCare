@@ -60,7 +60,7 @@ public Page<PatientDTO> PageParNomPatient(String nom, Pageable pageable){
         Patient patient = patientRepository
                 .findByIdAndEmail(id, email)
                 .orElseThrow(() ->
-                        new RuntimeException("vous ne puvez pas consulter ce patient "));
+                        new RuntimeException("vous ne pouvez pas consulter ce patient "));
 
         return patientMapper.toDTO(patient);
     }

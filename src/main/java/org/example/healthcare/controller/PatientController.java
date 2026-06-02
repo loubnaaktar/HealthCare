@@ -17,37 +17,43 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@PreAuthorize("hasRole('ADMIN')")
+
 @RequestMapping("/api/patient")
 public class PatientController {
     private final PatientService patientService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
 
     public Page<PatientDTO> getPatients(  @PageableDefault(sort = "nom",
             direction = Sort.Direction.ASC) Pageable pageabl) {
         return patientService.patientsList(pageabl);
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/ajouter")
     public PatientDTO ajouterPatient(@Valid @RequestBody PatientDTO patientDTO) {
        return patientService.ajouterPatient(patientDTO);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/modifier/{id}")
     public PatientDTO modifierPatient( @PathVariable Long id,@Valid @RequestBody PatientDTO patientDTO) {
 return patientService.modifierPatient(id,patientDTO);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/supprimer/{id}")
     public void supprimerPatient(@PathVariable Long id) {
         patientService.supprimerPatient(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/chercher/{id}")
     public PatientDTO chercherPatient(@PathVariable Long id) {
         return patientService.consulterPatient(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/Chercher_par_nom/{nom}")
     public Page<PatientDTO> patientParNom(@PathVariable String nom ,@PageableDefault(direction = Sort.Direction.ASC) Pageable pageable){
         return patientService.PageParNomPatient(nom,pageable);

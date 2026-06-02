@@ -4,6 +4,7 @@ import io.swagger.v3.oas.models.PathItem;
 import lombok.RequiredArgsConstructor;
 import org.example.healthcare.exception.GlobalExceptionHandler;
 import org.example.healthcare.security.CustomUserDetailsService;
+import org.example.healthcare.security.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -34,7 +35,7 @@ public class SecuriyConfig {
     private final CustomUserDetailsService userDetailsService;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, GlobalExceptionHandler.JwtFilter jwtFilter) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtFilter jwtFilter) throws Exception {
 
         http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> {
             auth.requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated();
