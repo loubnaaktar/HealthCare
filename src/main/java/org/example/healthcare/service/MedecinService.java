@@ -50,4 +50,9 @@ public class MedecinService {
         Page<Medecin> medecinPage = medecinRepository.findAllBySpecialite(specialite,pageable);
         return medecinPage.map(medecinMapper::toDTO);
     }
+
+    public Page<MedecinDTO> medecinParTelephone(String telephone, Pageable pageable){
+        Page<Medecin> medecinPage = medecinRepository.findAllByTelephone(telephone,pageable);
+        return medecinPage.map(medecinMapper::toDTO);
+    }
 }
