@@ -5,10 +5,12 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.example.healthcare.model.RendezVous;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 @Data
 
-public class RendezVousDTO {
+public class RendezVousDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Long id;
     @NotNull
     @Future

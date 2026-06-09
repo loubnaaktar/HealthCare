@@ -49,10 +49,4 @@ public class MedecinController {
         return medecinService.medecinParSpecialite(specialite, pageable);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/medecin_par_telephone")
-    public Page<MedecinDTO> medecinDTOPage(@RequestParam String telephone,Pageable pageable){
-        return medecinService.medecinParTelephone(telephone,pageable);
-    }
-
 }

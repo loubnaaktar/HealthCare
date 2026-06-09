@@ -24,7 +24,6 @@ public class PatientController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
-
     public Page<PatientDTO> getPatients(  @PageableDefault(sort = "nom",
             direction = Sort.Direction.ASC) Pageable pageabl) {
         return patientService.patientsList(pageabl);

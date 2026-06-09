@@ -21,4 +21,9 @@ public class RegisterRequest {
     private String email;
 
     private Utilisateur.Role role;
+
+    private String nom;
+    private String prenom;
+    private String telephone;
+    private String specialite;
 }
