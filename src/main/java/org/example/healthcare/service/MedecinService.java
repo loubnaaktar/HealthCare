@@ -1,9 +1,7 @@
 package org.example.healthcare.service;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.MedecinDTO;
-import org.example.healthcare.dto.PatientDTO;
 import org.example.healthcare.mapper.MedecinMapper;
 import org.example.healthcare.model.Medecin;
 import org.example.healthcare.repository.MedecinRepository;
@@ -12,11 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.core.support.RepositoryMethodInvocationListener;
 import org.springframework.stereotype.Service;
-import tools.jackson.databind.cfg.MapperBuilder;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
