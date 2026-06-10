@@ -5,6 +5,7 @@ import org.example.healthcare.dto.RendezVousDTO;
 import org.example.healthcare.service.PdfService;
 import org.example.healthcare.service.RendezVousService;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -25,21 +26,17 @@ public class PdfController {
 
     @PreAuthorize("hasAnyRole('ADMIN','MEDECIN','PATIENT')")
     @GetMapping("/rendezvous")
-    public ResponseEntity<InputStreamResource> downloadRendezVous() {
+    public ResponseEntity<byte[]> downloadPdf(Pageable pageable) {
 
-        List<RendezVousDTO> list = rendezVousService
-                .rendezVousDTOList(Pageable.unpaged())
-                .getContent();
 
-        ByteArrayInputStream pdf = pdfService.generateRendezVousPdf(list);
+      Page<RendezVousDTO> rdvsPage = rendezVousService.rendezVousDTOList(pageable);
+      List<RendezVousDTO> rdvs = rdvsPage.getContent();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "attachment; filename=rendezvous.pdf");
+        byte[] pdf = pdfService.generateRendezVousPdf(rdvs);
 
-        return ResponseEntity
-                .ok()
-                .headers(headers)
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=rendezvous.pdf")
                 .contentType(MediaType.APPLICATION_PDF)
-                .body(new InputStreamResource(pdf));
+                .body(pdf);
     }
 }
