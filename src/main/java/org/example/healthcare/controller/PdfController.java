@@ -25,17 +25,16 @@ public class PdfController {
     private final RendezVousService rendezVousService;
 
     @PreAuthorize("hasAnyRole('ADMIN','MEDECIN','PATIENT')")
-    @GetMapping("/rendezvous")
-    public ResponseEntity<byte[]> downloadPdf(Pageable pageable) {
+    @GetMapping("/rendezvous/{idPatient}")
+    public ResponseEntity<byte[]> downloadPdf(@PathVariable Long idPatient, Pageable pageable) {
 
-
-      Page<RendezVousDTO> rdvsPage = rendezVousService.rendezVousDTOList(pageable);
-      List<RendezVousDTO> rdvs = rdvsPage.getContent();
+        Page<RendezVousDTO> rdvsPage = rendezVousService.rendezVousDtoPatient(idPatient, pageable);
+        List<RendezVousDTO> rdvs = rdvsPage.getContent();
 
         byte[] pdf = pdfService.generateRendezVousPdf(rdvs);
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=rendezvous.pdf")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=rendezvous_patient_" + idPatient + ".pdf")
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(pdf);
     }

@@ -22,7 +22,7 @@ public class PdfService {
 
             document.open();
 
-            document.add(new Paragraph("Liste des Rendez-vous"));
+            document.add(new Paragraph("Liste des Rendez-vous du patient"));
             document.add(new Paragraph(" "));
 
             PdfPTable table = new PdfPTable(3);
