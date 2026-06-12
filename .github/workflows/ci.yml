@@ -27,6 +27,6 @@ jobs:
         run: chmod +x mvnw && ./mvnw -B package --file pom.xml -DskipTests
 
       - name: Deploy to Render
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.RENDER_DEPLOY_HOOK != ''
         run: |
           curl -X GET "${{ secrets.RENDER_DEPLOY_HOOK }}"
