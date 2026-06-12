@@ -17,6 +17,8 @@ public interface RendezVousRepository extends JpaRepository<RendezVous,Long> {
 
     Page<RendezVous> findByPatient_Id(Long idPatient, org.springframework.data.domain.Pageable pageable);
 
+    List<RendezVous> findByPatient_Id(Long idPatient);
+
     Page<RendezVous> findByMedecin_Id(Long idMedecin, org.springframework.data.domain.Pageable pageable);
 
     Page<RendezVous> findAllByStatut(RendezVous.StatutRendezVous statutRendezVous, Pageable pageable);

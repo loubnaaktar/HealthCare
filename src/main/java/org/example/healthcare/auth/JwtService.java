@@ -1,4 +1,4 @@
-package org.example.healthcare.security;
+package org.example.healthcare.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

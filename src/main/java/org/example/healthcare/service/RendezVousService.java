@@ -102,6 +102,10 @@ public class RendezVousService {
         return pageRv.map(rendezVousMapper::toDTO);
     }
 
+    public List<RendezVous> rendezVousPatient(Long idPatient) {
+        return rendezVousRepository.findByPatient_Id(idPatient);
+    }
+
     @Cacheable(
             value = "rendezvous",
             key = "#pageable.isPaged() ? 'medecin_' + #idMedecin + '_' + #pageable.pageNumber + '_' + #pageable.pageSize + '_' + #pageable.sort : 'medecin_' + #idMedecin + '_unpaged'"

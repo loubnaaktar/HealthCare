@@ -1,10 +1,6 @@
-package org.example.healthcare.controller;
+package org.example.healthcare.auth;
 
 import lombok.RequiredArgsConstructor;
-import org.example.healthcare.dto.auth.AuthRequest;
-import org.example.healthcare.dto.auth.AuthResponse;
-import org.example.healthcare.dto.auth.RegisterRequest;
-import org.example.healthcare.service.auth.AuthService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

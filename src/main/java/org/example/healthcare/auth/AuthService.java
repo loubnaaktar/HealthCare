@@ -1,13 +1,10 @@
-package org.example.healthcare.service.auth;
+package org.example.healthcare.auth;
 
 import lombok.RequiredArgsConstructor;
-import org.example.healthcare.dto.auth.AuthRequest;
-import org.example.healthcare.dto.auth.RegisterRequest;
 import org.example.healthcare.model.Medecin;
 import org.example.healthcare.model.Patient;
 import org.example.healthcare.model.Utilisateur;
 import org.example.healthcare.repository.UtilisateurRepository;
-import org.example.healthcare.security.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

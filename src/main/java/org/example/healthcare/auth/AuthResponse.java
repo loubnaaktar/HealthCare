@@ -1,4 +1,4 @@
-package org.example.healthcare.dto.auth;
+package org.example.healthcare.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

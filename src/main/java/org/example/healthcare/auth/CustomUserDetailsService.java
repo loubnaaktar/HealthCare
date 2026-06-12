@@ -1,4 +1,4 @@
-package org.example.healthcare.security;
+package org.example.healthcare.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.example.healthcare.model.Utilisateur;
